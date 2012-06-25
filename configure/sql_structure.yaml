@@ -1,0 +1,27 @@
+plan:
+  singular: plan
+  plural: plans
+  fields:
+    name: string
+    amount: "decimal(10,2)"
+    status: "enum('active','inactive')"
+    billing_day: number
+  hasOne:
+    - webapp.account
+subscription:
+  singular: subscription
+  plural: subscriptions
+  fields:
+    amount:"decimal(10,2)"
+    billing_day: number
+    failure_count: number
+    tax_deductible: boolean
+    status: "enum('active','held','cancelled')"
+    extra: text
+  hasOne:
+    - members.account
+    - plan
+  hasMany:
+    - invoices.invoice
+  extensions:
+    - taxonomy
